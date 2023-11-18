@@ -14,7 +14,7 @@ format:
 
 (Please clean up any comments that I included.  This is a scaffold document.)
 
-GITHUB URL:  <your URL goes here!>
+GITHUB URL:  <https://github.com/cmsc-vcu/cmsc508-fa2023-hw7-EmilSalazar>
 
 ```{python}
 #| eval: true
@@ -34,9 +34,9 @@ from IPython.display import display, Markdown
 
 # modify config_map to reflect credentials needed by this program
 config_map = {
-    'user':'CMSC508_USER',
-    'password':'CMSC508_PASSWORD',
-    'host':'CMSC508_HOST',
+    'user':'HW7_USER',
+    'password':'HW7_PASSWORD',
+    'host':'HW7_HOST',
     'database':'HW7_DB_NAME'
 }
 # load and store credentials
