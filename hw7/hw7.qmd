@@ -95,20 +95,55 @@ This database represents a company-wide resume capturing the collective skills a
 
 ## Crows-foot diagram
 
-(add a description of the diagram and what the reader is seeing.)
+The diagram visually represents the structure of our database, highlighting the relationships between people, their skills, and roles. It shows how the people, skills, and roles tables are interconnected via the peopleskills and peopleroles tables, illustrating a many-to-many relationship among them. This setup allows for tracking which skills each person has and what roles they occupy within the organization.
 
 ```{mermaid}
-%%| echo: false
 erDiagram
-    CUSTOMER ||--o{ ORDER : places
-    CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
-    CUSTOMER{
-        int id
-        string first_name
-        string last_name
+
+    people ||--o{ peopleskills : "have"
+    skills ||--o{ peopleskills : "includes"
+    people ||--o{ peopleroles : "occupy"
+    roles ||--o{ peopleroles : "assign"
+
+    skills {
+    INT id "Primary Key"
+    VARCHAR name
+    VARCHAR description
+    VARCHAR tag
+    VARCHAR url
+    VARCHAR time_commitment
     }
-    DELIVERY-ADDRESS {
-        int id
+
+    people {
+    INT id
+    VARCHAR first_name
+    VARCHAR last_name
+    VARCHAR email
+    VARCHAR linkedIn_url
+    VARCHAR headshot_url
+    VARCHAR discord_handle
+    VARCHAR brief_bio
+    DATE date_joined
+    }
+
+    peopleskills {
+    INT id
+    INT skills_id
+    INT people_id
+    DATE date_acquired
+    }
+
+    roles {
+    INT id
+    VARCHAR name
+    INT sort_priority
+    }
+
+    peopleroles {
+    INT id
+    INT people_id
+    INT role_ID
+    DATE date_assigned
     }
 ```
 

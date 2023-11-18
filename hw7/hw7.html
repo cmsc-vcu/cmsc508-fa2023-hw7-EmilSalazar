@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="(your name goes here!)">
+<meta name="author" content="Emil Baez Salazar">
 <meta name="dcterms.date" content="2023-11-18">
 
 <title>Homework 7 - Creating a resume database</title>
@@ -3351,7 +3351,7 @@ z-index: 1000;
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>(your name goes here!) </p>
+             <p>Emil Baez Salazar </p>
           </div>
   </div>
     
@@ -3368,30 +3368,65 @@ z-index: 1000;
 
 </header>
 
-<p>(include a brief description of what is in this document)</p>
-<p>(Please clean up any comments that I included. This is a scaffold document.)</p>
+<p>The document includes an overview and description of the database’s purpose and structure, a Crow’s-foot diagram illustrating the relationships between tables, examples of the types of data stored, and sample queries demonstrating how to interact with the database.</p>
 <p>GITHUB URL: <a href="https://github.com/cmsc-vcu/cmsc508-fa2023-hw7-EmilSalazar" class="uri">https://github.com/cmsc-vcu/cmsc508-fa2023-hw7-EmilSalazar</a></p>
 <section id="overview-and-description" class="level2">
 <h2 class="anchored" data-anchor-id="overview-and-description">Overview and description</h2>
-<p>(briefly describe the project and the database)</p>
+<p>This database represents a company-wide resume capturing the collective skills and certifications of all the people in our company. It consists of three main tables - people, skills, and roles - which work together to find employees with specific skills, list the skills of any employee and help find gaps in the skill sets of employees in specific roles.</p>
 </section>
 <section id="crows-foot-diagram" class="level2">
 <h2 class="anchored" data-anchor-id="crows-foot-diagram">Crows-foot diagram</h2>
-<p>(add a description of the diagram and what the reader is seeing.)</p>
+<p>The diagram visually represents the structure of our database, highlighting the relationships between people, their skills, and roles. It shows how the people, skills, and roles tables are interconnected via the peopleskills and peopleroles tables, illustrating a many-to-many relationship among them. This setup allows for tracking which skills each person has and what roles they occupy within the organization.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <div>
 <pre class="mermaid mermaid-js">erDiagram
-    CUSTOMER ||--o{ ORDER : places
-    CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
-    CUSTOMER{
-        int id
-        string first_name
-        string last_name
+
+    people ||--o{ peopleskills : &quot;have&quot;
+    skills ||--o{ peopleskills : &quot;includes&quot;
+    people ||--o{ peopleroles : &quot;occupy&quot;
+    roles ||--o{ peopleroles : &quot;assign&quot;
+
+    skills {
+    INT id &quot;Primary Key&quot;
+    VARCHAR name
+    VARCHAR description
+    VARCHAR tag
+    VARCHAR url
+    VARCHAR time_commitment
     }
-    DELIVERY-ADDRESS {
-        int id
+
+    people {
+    INT id
+    VARCHAR first_name
+    VARCHAR last_name
+    VARCHAR email
+    VARCHAR linkedIn_url
+    VARCHAR headshot_url
+    VARCHAR discord_handle
+    VARCHAR brief_bio
+    DATE date_joined
+    }
+
+    peopleskills {
+    INT id
+    INT skills_id
+    INT people_id
+    DATE date_acquired
+    }
+
+    roles {
+    INT id
+    VARCHAR name
+    INT sort_priority
+    }
+
+    peopleroles {
+    INT id
+    INT people_id
+    INT role_ID
+    DATE date_assigned
     }
 </pre>
 </div>
@@ -3401,20 +3436,19 @@ z-index: 1000;
 </section>
 <section id="examples-of-data-in-the-database" class="level2">
 <h2 class="anchored" data-anchor-id="examples-of-data-in-the-database">Examples of data in the database</h2>
-<p>For the people, skills, and roles tables, provide a description of each table and it’s contents. Then provide a listing of the entire table.</p>
 <section id="people-table" class="level3">
 <h3 class="anchored" data-anchor-id="people-table">People table</h3>
-<p>The <em>people</em> table contains elements that describe …</p>
+<p>The <em>people</em> table stores information about individuals. Each record in this table represents a person, with details about their professional lives. Some of these details include their name, linkedIn, discord, bio, and more.</p>
 <p>Below is a list of data in the <em>people</em> table.</p>
 </section>
 <section id="skills-table" class="level3">
 <h3 class="anchored" data-anchor-id="skills-table">Skills table</h3>
-<p>The <em>skills</em> table contains elements that describe …</p>
+<p>The <em>skills</em> table contains details about various skills. Each record is a distinct skill with a description and other relevant information. Some of these details also include a URL for more information about the skill and the time commitment needed for said skill.</p>
 <p>Below is a list of data in the <em>skills</em> table.</p>
 </section>
 <section id="roles-table" class="level3">
 <h3 class="anchored" data-anchor-id="roles-table">Roles table</h3>
-<p>The <em>roles</em> table contains elements that describe …</p>
+<p>The <em>roles</em> table is designed to keep track of various roles or positions. Each record has a specific role, often used in a professional environment. Also included is the sort priority to determine the order in which roles are sorted or listed.</p>
 <p>Below is a list of data in the <em>roles</em> table.</p>
 </section>
 </section>
@@ -3424,13 +3458,11 @@ z-index: 1000;
 </section>
 <section id="list-skill-names-tags-and-descriptions-ordered-by-name" class="level1">
 <h1>List skill names, tags, and descriptions ordered by name</h1>
-<p>(here a sample query)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sql_skills_ordered_by_name <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT name, tag, description FROM skills ORDER BY name;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>(and here is a sample result from the query)</p>
 <section id="list-people-names-and-email-addresses-ordered-by-last_name" class="level3">
 <h3 class="anchored" data-anchor-id="list-people-names-and-email-addresses-ordered-by-last_name">List people names and email addresses ordered by last_name</h3>
 <div class="cell">
@@ -3497,7 +3529,7 @@ z-index: 1000;
 </section>
 <section id="reflection" class="level2">
 <h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
-<p>(Write a paragraph expressing your thoughts, feelings, and insights about your experience with this assignment. Pause and breath before writing - I’m trying to encourage critical thinking and self-awareness while allowing you to explore the connections between theory and practice. And yes, delete this paragraph.)</p>
+<p>My experience with this assignment has been very positive. I think the assignment was surprisingly easier and more enjoyable than the previous one. I think the main reason is that since I already knew how to set everything up, I didn’t have to worry about simply adding data to the database. My only complaint is how tedious the assignment was since there was a lot of data to be added but, I think it was very helpful nonetheless since there was a variety of ways we were adding it between sections. Overall, I actually learned a lot. I think this was the assignment I needed to finally understand databases and SQL better. I feel a lot better now about the project after this!</p>
 </section>
 </section>
 
