@@ -3426,34 +3426,74 @@ z-index: 1000;
 <h1>List skill names, tags, and descriptions ordered by name</h1>
 <p>(here a sample query)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sql <span class="op">=</span> <span class="ss">f&quot;&quot;&quot;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ss">select * from people</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ss">&quot;&quot;&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sql_skills_ordered_by_name <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT name, tag, description FROM skills ORDER BY name;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>(and here is a sample result from the query)</p>
 <section id="list-people-names-and-email-addresses-ordered-by-last_name" class="level3">
 <h3 class="anchored" data-anchor-id="list-people-names-and-email-addresses-ordered-by-last_name">List people names and email addresses ordered by last_name</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sql_people_names_emails_ordered <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT CONCAT(first_name, &#39; &#39;, last_name) AS full_name, email FROM people ORDER BY last_name;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="list-skill-names-of-person-1" class="level3">
 <h3 class="anchored" data-anchor-id="list-skill-names-of-person-1">List skill names of Person 1</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sql_skills_of_person_1 <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT s.name FROM skills s JOIN peopleskills ps ON s.id = ps.skills_id WHERE ps.people_id = 1;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="list-people-names-with-skill-6" class="level3">
 <h3 class="anchored" data-anchor-id="list-people-names-with-skill-6">List people names with Skill 6</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sql_people_with_skill_6 <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT CONCAT(p.first_name, &#39; &#39;, p.last_name) AS full_name FROM people p JOIN peopleskills ps ON p.id = ps.people_id WHERE ps.skills_id = 6;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="list-people-with-a-developer-role" class="level3">
 <h3 class="anchored" data-anchor-id="list-people-with-a-developer-role">List people with a DEVELOPER role</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sql_people_with_developer_role <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT CONCAT(p.first_name, &#39; &#39;, p.last_name) AS full_name FROM people p JOIN peopleroles pr ON p.id = pr.people_id JOIN roles r ON pr.role_id = r.id WHERE r.name = &#39;Developer&#39;;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="list-names-and-email-addresses-of-people-without-skills" class="level3">
 <h3 class="anchored" data-anchor-id="list-names-and-email-addresses-of-people-without-skills">List names and email addresses of people without skills</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sql_people_without_skills <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT CONCAT(p.first_name, &#39; &#39;, p.last_name) AS full_name, p.email FROM people p WHERE NOT EXISTS (SELECT 1 FROM peopleskills ps WHERE ps.people_id = p.id);</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="list-names-and-tags-of-unused-skills" class="level3">
 <h3 class="anchored" data-anchor-id="list-names-and-tags-of-unused-skills">List names and tags of unused skills</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sql_unused_skills <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT s.name, s.tag FROM skills s WHERE NOT EXISTS (SELECT 1 FROM peopleskills ps WHERE ps.skills_id = s.id);</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="list-people-names-and-skill-names-with-the-boss-role" class="level3">
 <h3 class="anchored" data-anchor-id="list-people-names-and-skill-names-with-the-boss-role">List people names and skill names with the BOSS role</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sql_people_skills_with_boss_role <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT CONCAT(p.first_name, &#39; &#39;, p.last_name) AS full_name, s.name AS skill_name FROM people p JOIN peopleroles pr ON p.id = pr.people_id JOIN roles r ON pr.role_id = r.id JOIN peopleskills ps ON p.id = ps.people_id JOIN skills s ON ps.skills_id = s.id WHERE r.name = &#39;Boss&#39;;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="list-ids-and-names-of-unused-roles" class="level3">
 <h3 class="anchored" data-anchor-id="list-ids-and-names-of-unused-roles">List ids and names of unused roles</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sql_unused_roles <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT r.id, r.name FROM roles r WHERE NOT EXISTS (SELECT 1 FROM peopleroles pr WHERE pr.role_id = r.id);</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="reflection" class="level2">
 <h2 class="anchored" data-anchor-id="reflection">Reflection</h2>

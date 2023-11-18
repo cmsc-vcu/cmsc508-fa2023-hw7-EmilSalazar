@@ -1,6 +1,6 @@
 ---
 title: Homework 7 - Creating a resume database
-author: (your name goes here!)
+author: Emil Baez Salazar
 date: last-modified
 format:
     html:
@@ -149,8 +149,18 @@ Below is a list of data in the *skills* table.
 ```{python}
 #| echo: false
 #| eval: true
-
+sql = f"""
+select * from skills;
+"""
 ## Add code to list roles table here
+try:
+    df = pd.read_sql(sql,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
 ```
 
 ### Roles table
@@ -162,8 +172,18 @@ Below is a list of data in the *roles* table.
 ```{python}
 #| echo: false
 #| eval: true
-
+sql = f"""
+select * from roles;
+"""
 ## Add code to list roles table here
+try:
+    df = pd.read_sql(sql,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
 ```
 
 
@@ -176,8 +196,8 @@ Let's explore the database!
 (here a sample query)
 
 ```{python}
-sql = f"""
-select * from people
+sql_skills_ordered_by_name = """
+SELECT name, tag, description FROM skills ORDER BY name;
 """
 ```
 
@@ -188,7 +208,7 @@ select * from people
 #| echo: false
 #| eval: true
 try:
-    df = pd.read_sql(sql,cnx)
+    df = pd.read_sql(sql_skills_ordered_by_name,cnx)
     df
 except Exception as e:
     message = str(e)
@@ -201,27 +221,179 @@ df
 
 ### List people names and email addresses ordered by last_name
 
+```{python}
+sql_people_names_emails_ordered = """
+SELECT CONCAT(first_name, ' ', last_name) AS full_name, email FROM people ORDER BY last_name;
+"""
+```
+
+```{python}
+#| echo: false
+#| eval: true
+try:
+    df = pd.read_sql(sql_people_names_emails_ordered,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+
+```
 
 ### List skill names of Person 1
 
+```{python}
+sql_skills_of_person_1 = """
+SELECT s.name FROM skills s JOIN peopleskills ps ON s.id = ps.skills_id WHERE ps.people_id = 1;
+"""
+```
+
+```{python}
+#| echo: false
+#| eval: true
+try:
+    df = pd.read_sql(sql_skills_of_person_1,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+
+```
 
 ### List people names with Skill 6
 
+```{python}
+sql_people_with_skill_6 = """
+SELECT CONCAT(p.first_name, ' ', p.last_name) AS full_name FROM people p JOIN peopleskills ps ON p.id = ps.people_id WHERE ps.skills_id = 6;
+"""
+```
+
+```{python}
+#| echo: false
+#| eval: true
+try:
+    df = pd.read_sql(sql_people_with_skill_6,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+
+```
 
 ### List people with a DEVELOPER role
 
+```{python}
+sql_people_with_developer_role = """
+SELECT CONCAT(p.first_name, ' ', p.last_name) AS full_name FROM people p JOIN peopleroles pr ON p.id = pr.people_id JOIN roles r ON pr.role_id = r.id WHERE r.name = 'Developer';
+"""
+```
+
+```{python}
+#| echo: false
+#| eval: true
+try:
+    df = pd.read_sql(sql_people_with_developer_role,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+
+```
 
 ### List names and email addresses of people without skills
 
+```{python}
+sql_people_without_skills = """
+SELECT CONCAT(p.first_name, ' ', p.last_name) AS full_name, p.email FROM people p WHERE NOT EXISTS (SELECT 1 FROM peopleskills ps WHERE ps.people_id = p.id);
+"""
+```
+
+```{python}
+#| echo: false
+#| eval: true
+try:
+    df = pd.read_sql(sql_people_without_skills,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+
+```
 
 ### List names and tags of unused skills
 
+```{python}
+sql_unused_skills = """
+SELECT s.name, s.tag FROM skills s WHERE NOT EXISTS (SELECT 1 FROM peopleskills ps WHERE ps.skills_id = s.id);
+"""
+```
+
+```{python}
+#| echo: false
+#| eval: true
+try:
+    df = pd.read_sql(sql_unused_skills,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+
+```
 
 ### List people names and skill names with the BOSS role
 
+```{python}
+sql_people_skills_with_boss_role = """
+SELECT CONCAT(p.first_name, ' ', p.last_name) AS full_name, s.name AS skill_name FROM people p JOIN peopleroles pr ON p.id = pr.people_id JOIN roles r ON pr.role_id = r.id JOIN peopleskills ps ON p.id = ps.people_id JOIN skills s ON ps.skills_id = s.id WHERE r.name = 'Boss';
+"""
+```
+
+```{python}
+#| echo: false
+#| eval: true
+try:
+    df = pd.read_sql(sql_people_skills_with_boss_role,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+
+```
 
 ### List ids and names of unused roles
 
+```{python}
+sql_unused_roles = """
+SELECT r.id, r.name FROM roles r WHERE NOT EXISTS (SELECT 1 FROM peopleroles pr WHERE pr.role_id = r.id);
+"""
+```
+
+```{python}
+#| echo: false
+#| eval: true
+try:
+    df = pd.read_sql(sql_unused_roles,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+
+```
 
 ## Reflection
 
