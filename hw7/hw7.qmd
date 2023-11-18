@@ -10,9 +10,8 @@ format:
         code-copy: true
 ---
 
-(include a brief description of what is in this document)
+The document includes an overview and description of the database's purpose and structure, a Crow's-foot diagram illustrating the relationships between tables, examples of the types of data stored, and sample queries demonstrating how to interact with the database.
 
-(Please clean up any comments that I included.  This is a scaffold document.)
 
 GITHUB URL:  <https://github.com/cmsc-vcu/cmsc508-fa2023-hw7-EmilSalazar>
 
@@ -92,7 +91,7 @@ except Exception as e:
 
 ## Overview and description
 
-(briefly describe the project and the database)
+This database represents a company-wide resume capturing the collective skills and certifications of all the people in our company. It consists of three main tables - people, skills, and roles - which work together to find employees with specific skills, list the skills of any employee and help find gaps in the skill sets of employees in specific roles.
 
 ## Crows-foot diagram
 
@@ -115,11 +114,9 @@ erDiagram
 
 ## Examples of data in the database
 
-For the people, skills, and roles tables, provide a description of each table and it's contents. Then provide a listing of the entire table.
-
 ### People table
 
-The *people* table contains elements that describe ... 
+The *people* table stores information about individuals. Each record in this table represents a person, with details about their professional lives. Some of these details include their name, linkedIn, discord, bio, and more.
 
 Below is a list of data in the *people* table.
 
@@ -142,7 +139,7 @@ df
 
 ### Skills table
 
-The *skills* table contains elements that describe ... 
+The *skills* table contains details about various skills. Each record is a distinct skill with a description and other relevant information. Some of these details also include a URL for more information about the skill and the time commitment needed for said skill.
 
 Below is a list of data in the *skills* table.
 
@@ -165,7 +162,7 @@ df
 
 ### Roles table
 
-The *roles* table contains elements that describe ... 
+The *roles* table is designed to keep track of various roles or positions. Each record has a specific role, often used in a professional environment. Also included is the sort priority to determine the order in which roles are sorted or listed.
 
 Below is a list of data in the *roles* table.
 
@@ -193,16 +190,11 @@ Let's explore the database!
 
 # List skill names, tags, and descriptions ordered by name
 
-(here a sample query)
-
 ```{python}
 sql_skills_ordered_by_name = """
 SELECT name, tag, description FROM skills ORDER BY name;
 """
 ```
-
-
-(and here is a sample result from the query)
 
 ```{python}
 #| echo: false
@@ -397,5 +389,4 @@ df
 
 ## Reflection
 
-(Write a paragraph expressing your thoughts, feelings, and insights about your experience with this assignment.  Pause and breath before writing - I'm trying to encourage critical thinking and self-awareness while allowing you to explore the connections between theory and practice. And yes, delete this paragraph.)
-
+My experience with this assignment has been very positive. I think the assignment was surprisingly easier and more enjoyable than the previous one. I think the main reason is that since I already knew how to set everything up, I didn't have to worry about simply adding data to the database. My only complaint is how tedious the assignment was since there was a lot of data to be added but, I think it was very helpful nonetheless since there was a variety of ways we were adding it between sections. Overall, I actually learned a lot. I think this was the assignment I needed to finally understand databases and SQL better. I feel a lot better now about the project after this!
