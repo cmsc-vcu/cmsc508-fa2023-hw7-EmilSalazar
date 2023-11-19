@@ -123,9 +123,23 @@ VALUES (5, 'Ethan', 'Person 5', 'ethan.person5@example.com', 'https://linkedin.c
 
 -- Person 6
 INSERT INTO people (id, first_name, last_name, email, linkedin_url, headshot_url, discord_handle, brief_bio, date_joined) 
-VALUES (6, 'Fiona', 'Person 6', 'fiona.person6@example.com', 'https://linkedin.com/in/fionaperson6', 'https://example.com/headshots/fiona6.jpg', 'FionaTech#6789', 'Tech entrepreneur with a focus on developing educational apps for children.', '2020-09-17');
+VALUES (6, 'Emil', 'Person 6', 'emil.person6@example.com', 'https://linkedin.com/in/emilperson6', 'https://example.com/headshots/emil6.jpg', 'EmilTech#6789', 'A student who has a bad reputation of procrastinating.', '2020-09-17');
 
+-- Person 7
+INSERT INTO people (id, first_name, last_name, email, linkedin_url, headshot_url, discord_handle, brief_bio, date_joined) 
+VALUES (7, 'Alquin', 'Person 7', 'Alquin.person3@example.com', 'https://linkedin.com/in/Alquinperson3', 'https://example.com/headshots/Alquin3.jpg', 'AlquinSpace#3456', 'A super good coder who likes coding.', '2022-01-15');
 
+-- Person 8
+INSERT INTO people (id, first_name, last_name, email, linkedin_url, headshot_url, discord_handle, brief_bio, date_joined) 
+VALUES (8, 'Harita', 'Person 8', 'Harita.person4@example.com', 'https://linkedin.com/in/Haritaperson4', 'https://example.com/headshots/Harita4.jpg', 'HaritaArt#4567', 'Loves to work with python and builds rocket.', '2019-11-22');
+
+-- Person 9
+INSERT INTO people (id, first_name, last_name, email, linkedin_url, headshot_url, discord_handle, brief_bio, date_joined) 
+VALUES (9, 'Patrick', 'Person 9', 'Patrick.person5@example.com', 'https://linkedin.com/in/Patrickperson5', 'https://example.com/headshots/Patrick5.jpg', 'PatrickExplorer#5678', 'Great at exploring the nature and loves yellowstone park.', '2021-07-03');
+
+-- Person 10
+INSERT INTO people (id, first_name, last_name, email, linkedin_url, headshot_url, discord_handle, brief_bio, date_joined) 
+VALUES (10, 'Adrienne', 'Person 10', 'Adrienne.person6@example.com', 'https://linkedin.com/in/Adrienneperson6', 'https://example.com/headshots/Adrienne6.jpg', 'AdrienneTech#6789', 'Great friend and student who also plays video games.', '2020-09-17');
 -- insert into people (people_id,people_last_name) values (1,'Person 1');
 
 
@@ -138,7 +152,8 @@ CREATE TABLE peopleskills (
     skills_id INT NOT NULL,
     people_id INT NOT NULL,
     date_acquired DATE NOT NULL,
-    FOREIGN KEY (skills_id) REFERENCES skills(id)
+    FOREIGN KEY (skills_id) REFERENCES skills(id),
+    FOREIGN KEY (people_id) REFERENCES people(id)
 );
 
 
@@ -250,6 +265,7 @@ CREATE TABLE peopleroles (
     people_id INT NOT NULL,
     role_id INT NOT NULL,
     date_assigned DATE NOT NULL,
+    FOREIGN KEY (people_id) REFERENCES people(id),
     FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 

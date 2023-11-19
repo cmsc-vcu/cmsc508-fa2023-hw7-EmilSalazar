@@ -106,7 +106,7 @@ erDiagram
     roles ||--o{ peopleroles : "assign"
 
     skills {
-    INT id "Primary Key"
+    INT id
     VARCHAR name
     VARCHAR description
     VARCHAR tag

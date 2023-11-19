@@ -1,1 +1,3 @@
 # cmsc508-fa2023-hw7-template
+
+The goal for this assignment was to create a database that represents a company-wide resume capturing the collective skills and certifications of all the people in our company. It consists of three main tables - people, skills, and roles - which work together to find employees with specific skills, list the skills of any employee and help find gaps in the skill sets of employees in specific roles. 

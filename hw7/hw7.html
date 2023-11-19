@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Emil Baez Salazar">
-<meta name="dcterms.date" content="2023-11-18">
+<meta name="dcterms.date" content="2023-11-19">
 
 <title>Homework 7 - Creating a resume database</title>
 <style>
@@ -3363,7 +3363,7 @@ z-index: 1000;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 18, 2023</p>
+      <p class="date">November 19, 2023</p>
     </div>
   </div>
   
@@ -3394,7 +3394,7 @@ z-index: 1000;
     roles ||--o{ peopleroles : &quot;assign&quot;
 
     skills {
-    INT id &quot;Primary Key&quot;
+    INT id
     VARCHAR name
     VARCHAR description
     VARCHAR tag
@@ -3529,13 +3529,61 @@ z-index: 1000;
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
 <td>6</td>
-<td>Fiona</td>
+<td>Emil</td>
 <td>Person 6</td>
-<td>fiona.person6@example.com</td>
-<td>https://linkedin.com/in/fionaperson6</td>
-<td>https://example.com/headshots/fiona6.jpg</td>
-<td>FionaTech#6789</td>
-<td>Tech entrepreneur with a focus on developing e...</td>
+<td>emil.person6@example.com</td>
+<td>https://linkedin.com/in/emilperson6</td>
+<td>https://example.com/headshots/emil6.jpg</td>
+<td>EmilTech#6789</td>
+<td>A student who has a bad reputation of procrast...</td>
+<td>2020-09-17</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>7</td>
+<td>Alquin</td>
+<td>Person 7</td>
+<td>Alquin.person3@example.com</td>
+<td>https://linkedin.com/in/Alquinperson3</td>
+<td>https://example.com/headshots/Alquin3.jpg</td>
+<td>AlquinSpace#3456</td>
+<td>A super good coder who likes coding.</td>
+<td>2022-01-15</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>8</td>
+<td>Harita</td>
+<td>Person 8</td>
+<td>Harita.person4@example.com</td>
+<td>https://linkedin.com/in/Haritaperson4</td>
+<td>https://example.com/headshots/Harita4.jpg</td>
+<td>HaritaArt#4567</td>
+<td>Loves to work with python and builds rocket.</td>
+<td>2019-11-22</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>9</td>
+<td>Patrick</td>
+<td>Person 9</td>
+<td>Patrick.person5@example.com</td>
+<td>https://linkedin.com/in/Patrickperson5</td>
+<td>https://example.com/headshots/Patrick5.jpg</td>
+<td>PatrickExplorer#5678</td>
+<td>Great at exploring the nature and loves yellow...</td>
+<td>2021-07-03</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>10</td>
+<td>Adrienne</td>
+<td>Person 10</td>
+<td>Adrienne.person6@example.com</td>
+<td>https://linkedin.com/in/Adrienneperson6</td>
+<td>https://example.com/headshots/Adrienne6.jpg</td>
+<td>AdrienneTech#6789</td>
+<td>Great friend and student who also plays video ...</td>
 <td>2020-09-17</td>
 </tr>
 </tbody>
@@ -3817,28 +3865,48 @@ z-index: 1000;
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>Bella Person 2</td>
-<td>bella.person2@example.com</td>
+<td>Adrienne Person 10</td>
+<td>Adrienne.person6@example.com</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>Charlie Person 3</td>
-<td>charlie.person3@example.com</td>
+<td>Bella Person 2</td>
+<td>bella.person2@example.com</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
-<td>Danielle Person 4</td>
-<td>danielle.person4@example.com</td>
+<td>Charlie Person 3</td>
+<td>charlie.person3@example.com</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
-<td>Ethan Person 5</td>
-<td>ethan.person5@example.com</td>
+<td>Danielle Person 4</td>
+<td>danielle.person4@example.com</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">5</td>
-<td>Fiona Person 6</td>
-<td>fiona.person6@example.com</td>
+<td>Ethan Person 5</td>
+<td>ethan.person5@example.com</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>Emil Person 6</td>
+<td>emil.person6@example.com</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>Alquin Person 7</td>
+<td>Alquin.person3@example.com</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>Harita Person 8</td>
+<td>Harita.person4@example.com</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>Patrick Person 9</td>
+<td>Patrick.person5@example.com</td>
 </tr>
 </tbody>
 </table>
@@ -3914,6 +3982,18 @@ z-index: 1000;
 <td data-quarto-table-cell-role="th">1</td>
 <td>Ethan Person 5</td>
 </tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Alquin Person 7</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Harita Person 8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Patrick Person 9</td>
+</tr>
 </tbody>
 </table>
 
@@ -3951,7 +4031,15 @@ z-index: 1000;
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>Fiona Person 6</td>
+<td>Emil Person 6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Patrick Person 9</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Adrienne Person 10</td>
 </tr>
 </tbody>
 </table>
